@@ -87,7 +87,7 @@ red=Reduction(230)
 numFolds = trainControl(method="cv",number=10, summaryFunction=twoClassSummary,classProbs=TRUE)
 nngrid= expand.grid(.size=c(1,3,5), .decay=c(0,0.001,0.1,5e-4)) #takes all possible combinations of specified values
 
-model_cv= train(TARGET~.,data=red$train, method= 'nnet',maxit=300,trControl=numFolds,tuneGrid=nngrid)
+model_cv= train(as.factor(TARGET)~.,data=red$train, method= 'nnet',maxit=300,trControl=numFolds,tuneGrid=nngrid)
 #Models compared on auc values. According to cv, best result with size=3 and decay =.1
 
 model_nn= nnet(TARGET~.,data=red$train,size=3,rang=.1,decay=0.1,maxit=300)
